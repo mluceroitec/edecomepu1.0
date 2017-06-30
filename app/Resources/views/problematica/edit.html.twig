@@ -1,0 +1,163 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block body %}#}
+    {#<h1>Problematica edit</h1>#}
+
+    {#{{ form_start(edit_form) }}#}
+        {#{{ form_widget(edit_form) }}#}
+        {#<input type="submit" value="Edit" />#}
+    {#{{ form_end(edit_form) }}#}
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('admin_problematica_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#{{ form_start(delete_form) }}#}
+                {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    {#</ul>#}
+{#{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <div class="card">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title text-center">Problematica</h4>
+            <p class="category text-center">Completar los campos</p>
+        </div>
+        <div class="card content">
+            {{ form_start(edit_form) }}
+            <div class="col-sm-3">
+                <div class="form-group label-floating">
+                    <label class="control-label">Calle</label>
+                    {{ form_widget(edit_form.calle, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+            <div class="col-sm-1">
+
+                <div class="form-group label-floating">
+                    <label class="control-label">N°</label>
+                    {{ form_widget(edit_form.altura, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-2" style="display: none">
+                <div class="form-group label-floating">
+                    <label class="control-label">Ciudad</label>
+                    {{ form_widget(edit_form.ciudad, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-3" style="display: none">
+                <div class="form-group label-floating">
+                    <label class="control-label">Provincia</label>
+                    {{ form_widget(edit_form.provincia, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-3" style="display: none">
+                <div class="form-group label-floating text">
+                    <label class="control-label">Pais</label>
+                    {{ form_widget(edit_form.pais, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-6" style="display: none">
+                <div class="form-group label-floating">
+                    <label class="control-label">Latitud</label>
+                    {{ form_widget(edit_form.latitud, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-6" style="display: none" >
+
+                <div class="form-group label-floating">
+                    <label class="control-label">Longitud</label>
+                    {{ form_widget(edit_form.longitud, { 'attr': {'class':'form-control'}})}}
+
+                </div>
+            </div>
+
+
+            <div class="col-sm-12">
+                <div class="form-group label-floating">
+                    <label class="control-label ">Observacion</label>
+                    {{ form_widget(edit_form.descripcion, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="form-group label-floating">
+                    <label class="control-label">Problematica</label>
+                    {{ form_widget(edit_form.tipoproblematica, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+            <div style="display: none">
+                <div class="form-group label-floating">
+                    {{ form_widget(edit_form.fecha, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <input class="btn btn-primary btn-round pull-right " id="action" type="submit" value="Guardar" />
+    {{ form_end(edit_form) }}
+    <a class="btn btn-primary btn-round pull-left" href="{{ path('admin_problematica_index') }}">Ir al listado</a>
+    <li>
+        {{ form_start(delete_form) }}
+        <input  class="btn btn-primary pull-left btn-danger" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </li>
+    {#{{ form_start(form) }}#}
+    {#{{ form_widget(form) }}#}
+    {#{{ form_end(form) }}#}
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}" ></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}" ></script>
+    <script src="{{ asset('assets/js/material.min.js') }}" ></script>
+
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+
+    <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+
+    <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+    <script src="{{ asset('assets/js/material-kit.js') }}" ></script>
+    <script src="{{ asset('assets/js/material-dashboard.js') }}"></script>
+
+
+    <script>
+
+        $(document).ready(function ( ) {
+            $('#action').click(function () {
+                console.log("hola nata");
+                //var selectedoption=$('#appbundle_problematica_domicilio').val();
+                //console.log(selectedoption);
+                var calle=$('#appbundle_problematica_localidad').val();
+                var numero=$('#appbundle_problematica_numero').val();
+                $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
+                    console.log(json.results[0].geometry.location.lat);
+                    console.log(json.results[0].geometry.location.lng);
+
+                    // console.log(json.results[0].geometry);
+                    //document.getElementById("valores").value = mensaje;
+                    document.getElementById("appbundle_problematica_longitud").value =(json.results[0].geometry.location.lng) ;
+
+                    document.getElementById("appbundle_problematica_latitud").value =(json.results[0].geometry.location.lat) ;
+
+                });
+            })
+        });
+
+    </script>
+{% endblock %}

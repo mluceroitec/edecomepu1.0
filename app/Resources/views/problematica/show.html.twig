@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="card">
+        <div class="card-header" data-background-color="purple">
+            <h3 class="title text-center">Producto</h3>
+            <h4 class=" text-center">Detalle del producto</h4>
+        </div>
+        <table class="table responsive-table">
+                <br>
+                <tr>
+                    <th class="">Calle:</th>
+                    <td>{{ problematica.calle }}</td>
+                </tr>
+                <tr>
+                    <th class="">Numero:</th>
+                    <td>{{ problematica.altura }}</td>
+                </tr>
+                <tr>
+                    <th class="">Ciudad:</th>
+                    <td>{{ problematica.ciudad }}</td>
+                </tr>
+                <tr>
+                    <th class="">Provincia:</th>
+                    <td>{{ problematica.provincia}}</td>
+                </tr>
+                <tr>
+                    <th class="">Pais:</th>
+                    <td>{{ problematica.pais }}</td>
+                </tr>
+                <tr>
+                    <th class="">Observacion:</th>
+                    <td>{{ problematica.descripcion }}</td>
+                </tr>
+                <tr>
+                    <th class="">Fecha:</th>
+                    <td>{% if problematica.fecha %}{{ problematica.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th class="">Tipo de Problema:</th>
+                    <td>{{ problematica.tipoproblematica}}</td>
+                </tr>
+        </table>
+    </div>
+    <a class="btn btn-primary pull-left" href="{{ path('admin_problematica_index') }}">Volver al menu </a>
+
+    <a class="btn btn-primary pull-right" href="{{ path('admin_problematica_edit', { 'id': problematica.id }) }}">Editar</a>
+
+    {{ form_start(delete_form) }}
+    <input  class="btn btn-primary pull-left btn-danger" type="submit" value="Eliminar">
+    {{ form_end(delete_form) }}
+
+
+
+{% endblock %}

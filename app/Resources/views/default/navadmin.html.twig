@@ -1,0 +1,72 @@
+
+    <div class="sidebar" data-color="purple" data-image="">
+        {#<div class="sidebar" data-color="purple" data-image="{{ asset('assets/img/google-maps-new-interface.jpg') }}">#}
+
+        <!--
+            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+            Tip 2: you can also add an image using data-image tag
+        -->
+
+        <div class="logo">
+            <a  class="simple-text">
+                Administración
+            </a>
+        </div>
+
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                {#<li class="">#}
+                    {#<a href="{{ path('admin')}}">#}
+                        {#<i class="material-icons">dashboard</i>#}
+                        {#<p>Home</p>#}
+                    {#</a>#}
+                {#</li>#}
+                <li >
+                    <a href="{{ path('admin_problematica_index')}}">
+                        <i class="material-icons">bubble_chart</i>
+
+                        <p class="control-label">Problematicas</p>
+                    </a>
+                </li>
+                <li class="divider"></li>
+
+                <li>
+                    <a href="{{ path ('admin_problematica_new') }}">
+                        <i class="material-icons">create</i>
+                        <p class="control-label">Alta de Problematicas</p>
+                    </a>
+                </li>
+                <li class="divider"></li>
+
+                <li>
+                    <a href="{{ path ('admin_problematica_mapa') }}">
+                        <i class="material-icons">satellite</i>
+                        <p class="control-label">Mapa</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}" ></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}" ></script>
+        <script src="{{ asset('assets/js/material.min.js') }}" ></script>
+
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+
+        <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
+
+        <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
+        <script src="{{ asset('assets/js/material-dashboard.js') }}"></script>
+
+
+
+
+
+
+
+
+    {% endblock %}

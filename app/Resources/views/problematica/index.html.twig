@@ -1,0 +1,101 @@
+
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div  class="card">
+        <div class="card-header" data-background-color="purple">
+            <h3 class="title text-center">Problematicas </h3>
+            <h4 class="category text-center ">Aqui se encuentran todas las problematicas.</h4>
+        </div>
+        {#<input type="search" class="" aria-controls="example"/>#}
+        <div class="card content ">
+            <br>
+            <br>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group  is-empty">
+                    <input type="text" class="form-control" id="kwd_search" placeholder="Buscador">
+                    <span class="material-input"></span>
+                </div>
+                <a type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons ">search</i><div class="ripple-container"></div>
+                </a>
+            </form>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+            <table class="table responsive-table " id="my-table" >
+                <thead class="text-primary">
+                <tr>
+                    <th></th>
+                    <th class="text-center">Problematica</th>
+                    <th class="text-center">Calle</th>
+                    <th class="text-center">Altura</th>
+                    <th class="text-center">Ciudad</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Hora</th>
+                    <th class="text-center">Ver detalle</th>
+                    <th class="text-center">Editar</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for problematica in problematicas %}
+                    <tr>
+                        <td class="text-center"><img style="width: 50%;" src="{{asset('assets/img/'~problematica.tipoproblematica.marcador)}}" ></td>
+                        <td class="text-center">{{ problematica.tipoproblematica }}</td>
+                        <td class="text-center">{{ problematica.calle }}</td>
+                        <td class="text-center">{{ problematica.altura }}</td>
+                        <td class="text-center">{{ problematica.ciudad }}</td>
+                        <td class="text-center">{% if problematica.fecha %}{{ problematica.fecha|date('d-m-Y') }}{% endif %}</td>
+                        <td class="text-center">{% if problematica.fecha %}{{ problematica.fecha|date('H:i') }}{% endif %}</td>
+                        <td class="text-center">
+                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras ver los detalles de la problematica " href="{{ path('admin_problematica_show', { 'id': problematica.id }) }}"><i class="material-icons">remove_red_eye</i></a>
+                        </td >
+                        <td class="text-center" >
+                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras editar los campos de la problematica "href="{{ path('admin_problematica_edit', { 'id': problematica.id }) }}"><i class="material-icons">create</i></a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <a class="btn btn-primary btn-round center-block" href="{{ path('admin_problematica_new') }}">Cargar nueva problematica</a>
+
+{% endblock %}
+    {% block javascripts %}
+        <script>
+            $(document).ready(function(){
+// Write on keyup event of keyword input element
+                $("#kwd_search").keyup(function(){
+// When value of the input is not blank
+                    if( $(this).val() != "")
+                    {
+// Show only matching TR, hide rest of them
+                        $("#my-table tbody>tr").hide();
+                        $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+                    }
+                    else
+                    {
+// When there is no input or clean again, show everything back
+                        $("#my-table tbody>tr").show();
+                    }
+                });
+            });
+            // jQuery expression for case-insensitive filter
+            $.extend($.expr[":"],
+                    {
+                        "contains-ci": function(elem, i, match, array)
+                        {
+                            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                        }
+                    });
+        </script>
+
+    {% endblock %}
