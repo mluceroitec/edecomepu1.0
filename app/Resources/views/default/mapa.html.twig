@@ -17,7 +17,6 @@
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries=geometry,places"></script>
          <style>
              .map-container {
-                 display: inline-block;
                  height: 600px;
                  width: 80%;
                  margin: 0% 10%;
@@ -27,30 +26,46 @@
 
                  text-decoration: none;
              }
+             .sidebar-wrapper{
+                 margin: 0% 10%;
+             }
          </style>
      {% endblock %}
 {% block body %}
-    <div id="imprimir ">
-        <button class="map-print">print</button>
+
+    <div class="sidebar-wrapper">
+        <ul class="card">
+            <div class="col-sm-3  ">
+                <div class="form-group label-floating divsRadios">
+                    <label class="control-label">Problematicas</label>
+                    <select id="mySelect" onchange="myFunction()" class="form-control">
+                        <option value></option>
+                        <option value="1">Luminarias</option>
+                        <option value="2">Obras Publicas</option>
+                        <option value="3">Higiene Urbana</option>
+                        <option value="4">Seguridad</option>
+                        <option value="5">Transito</option>
+                        <option value="6">Espacios Verdes</option>
+                        <option value="7">Todo las problematicas</option>
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-sm-3 ">
+                <div class="form-group label-floating divsRadios">
+                    <div id="imprimir  ">
+                        <button class="map-print btn  btn-primary">Imprimir mapa</button>
+                    </div>
+                </div>
+            </div>
+        </ul>
+
     </div>
 
-    <div class="col-sm-4 col-lg-offset-4">
-        <div class="form-group label-floating divsRadios">
-            <label class="control-label">Problematicas</label>
-            <select  id="appbundle_test_tipoproblematica" class="form-control">
-                <option value></option>
-                <option value="1">Luminarias</option>
-                <option value="2">Obras Publicas</option>
-                <option value="3">Higiene Urbana</option>
-                <option value="4">Seguridad</option>
-                <option value="5">Transito</option>
-                <option value="6">Espacios Verdes</option>
-            </select>
-        </div>
+    <div class="map-container">
+
     </div>
-    <br>
-    <br>
-    <div class="map-container"></div>
 
 
 
@@ -60,114 +75,186 @@
 {% block javascripts %}
     <script>
 
-        /**
-         * My very own *not* quite hackish approach to workaround Google Maps printing,
-         * crafted with <3.
-         * @see http://stackoverflow.com/q/13050215/2013891
-         */
-        $(function () {
 
-            // Java
-//            var center = new google.maps.LatLng(-7.4917, 110.0044);
+        $(document).ready(function () {
+            var idproblematica=$('#appbundle_test_tipoproblematica').val();
+            $.ajax({
+                type: "POST",
+                url: "{{ path ("carga_mapaa") }}",
+                data: {optio:''}
+            }).done(function (data) {
+                $(function () {
 
-            // Jakarta, Bogor, Bekasi, Tangerang, Surabaya
-            var locations = [
-                { lat: -6.1745, lng: 106.8227 },
-                { lat: -6.6000, lng: 106.8000 },
-                { lat: -6.2333, lng: 107.0000 },
-                { lat: -6.1783, lng: 106.6319 },
-                { lat: -7.2653, lng: 112.7425 },
-            ];
-            var a=[{"id":"1",
-                "localidad":"leopoldo lugones",
-                "latitud":"-33.1141815",
-                "longitud":"-64.3691723",
-                "observacion":"no hay luz",
-                "nombre":"Luminarias",
-                "marcador":"yellow-dot.png"},
-                {"id":"2",
-                    "localidad":"sobremonte",
-                    "latitud":"-33.1216261",
-                    "longitud":"-64.3478411",
-                    "observacion":"vive una chica linda",
-                    "nombre":"Seguridad",
-                    "marcador":"red-dot.png"}
-            ];
+                    var marcadores= JSON.stringify(data);
+                    var obj = $.parseJSON(marcadores);
 
-            var mapContainer = $('.map-container');
-            var map = new google.maps.Map(mapContainer[0], {
-                zoom: 13,
-                center: new google.maps.LatLng( -33.1244068, -64.3421894,13),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-
-            });
-
-            var markers = (a)
-                    .map(function (loc) {
-                        return new google.maps.Marker({
-                            position: new google.maps.LatLng(loc.latitud, loc.longitud),
-                            icon: 'assets/img/'+loc.marcador,
-                            title:'Nombre: '+loc.nombre+' Problematica: '+loc.observacion,
-                            map: map,
-                            draggable:true
-
-
-
-
-                        });
-                    })
-
-
-                    .forEach(function (marker) {
-                        marker.setMap(map);
+                    var mapContainer = $('.map-container');
+                    var map = new google.maps.Map(mapContainer[0], {
+                        zoom: 13,
+                        center: new google.maps.LatLng( -33.1244068, -64.3421894,13),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
 
                     });
+
+                    var markers = (obj)
+                            .map(function (loc) {
+                                return new google.maps.Marker({
+                                    position: new google.maps.LatLng(loc.latitud, loc.longitud),
+                                    icon: 'assets/img/'+loc.marcador,
+                                    title:'Nombre: '+loc.nombre+' Problematica: '+loc.descripcion,
+                                    map: map,
+                                    url: 'http://www.google.com',
+
+                                    draggable:true
+
+                                });
+                            })
+
+
+                            .forEach(function (marker) {
+                                marker.setMap(map);
+
+                            });
 
 //            new MarkerClusterer(map, markers);
 
 
 
-            $('.map-print').on('click',
+                    $('.map-print').on('click',
 
-                    // printAnyMaps :: _ -> HTML
-                    function printAnyMaps() {
-                        var $body = $('body');
-                        var $mapContainer = $('.map-container');
-                        var $mapContainerParent = $mapContainer.parent();
-                        var $printContainer = $('<div style="position:relative;">');
+                            // printAnyMaps :: _ -> HTML
+                            function printAnyMaps() {
+                                var $body = $('body');
+                                var $mapContainer = $('.map-container');
+                                var $mapContainerParent = $mapContainer.parent();
+                                var $printContainer = $('<div style="position:relative;">');
 
-                        $printContainer
-                                .height($mapContainer.height())
-                                .append($mapContainer)
-                                .prependTo($body);
+                                $printContainer
+                                        .height($mapContainer.height())
+                                        .append($mapContainer)
+                                        .prependTo($body);
 
-                        var $content = $body
-                                .children()
-                                .not($printContainer)
-                                .not('script')
-                                .detach();
+                                var $content = $body
+                                        .children()
+                                        .not($printContainer)
+                                        .not('script')
+                                        .detach();
 
-                        /**
-                         * Needed for those who use Bootstrap 3.x, because some of
-                         * its `@media print` styles ain't play nicely when printing.
-                         */
-                        var $patchedStyle = $('<style media="print">')
-                                .text(
-                                        'img { max-width: none !important; }' +
-                                        'a[href]:after { content: ""; }'
-                                )
-                                .appendTo('head');
+                                /**
+                                 * Needed for those who use Bootstrap 3.x, because some of
+                                 * its `@media print` styles ain't play nicely when printing.
+                                 */
+                                var $patchedStyle = $('<style media="print">')
+                                        .text(
+                                                'img { max-width: none !important; }' +
+                                                'a[href]:after { content: ""; }'
+                                        )
+                                        .appendTo('head');
 
-                        window.print();
+                                window.print();
 
-                        $body.prepend($content);
-                        $mapContainerParent.prepend($mapContainer);
+                                $body.prepend($content);
+                                $mapContainerParent.prepend($mapContainer);
 
-                        $printContainer.remove();
-                        $patchedStyle.remove();
-                    });
+                                $printContainer.remove();
+                                $patchedStyle.remove();
+                            });
+                });
+
+            })
+
         });
+        function myFunction() {
+            var x = document.getElementById("mySelect").value;
+            $(document).ready(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path ("remplaza_mapaa") }}",
+                    data: {option:x}
+                }).done(function (data) {
+                    $(function () {
+
+                        var marcadores= JSON.stringify(data);
+                        var obj = $.parseJSON(marcadores);
+
+                        var mapContainer = $('.map-container');
+                        var map = new google.maps.Map(mapContainer[0], {
+                            zoom: 13,
+                            center: new google.maps.LatLng( -33.1244068, -64.3421894,13),
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+                        });
+
+                        var markers = (obj)
+                                .map(function (loc) {
+                                    return new google.maps.Marker({
+                                        position: new google.maps.LatLng(loc.latitud, loc.longitud),
+                                        icon: 'assets/img/'+loc.marcador,
+                                        title:'Nombre: '+loc.nombre+' Problematica: '+loc.descripcion,
+                                        map: map,
+                                        url: 'http://www.google.com',
+
+                                        draggable:true
+
+                                    });
+                                })
+
+
+                                .forEach(function (marker) {
+                                    marker.setMap(map);
+
+                                });
+
+//            new MarkerClusterer(map, markers);
+
+
+
+                        $('.map-print').on('click',
+
+                                // printAnyMaps :: _ -> HTML
+                                function printAnyMaps() {
+                                    var $body = $('body');
+                                    var $mapContainer = $('.map-container');
+                                    var $mapContainerParent = $mapContainer.parent();
+                                    var $printContainer = $('<div style="position:relative;">');
+
+                                    $printContainer
+                                            .height($mapContainer.height())
+                                            .append($mapContainer)
+                                            .prependTo($body);
+
+                                    var $content = $body
+                                            .children()
+                                            .not($printContainer)
+                                            .not('script')
+                                            .detach();
+
+                                    /**
+                                     * Needed for those who use Bootstrap 3.x, because some of
+                                     * its `@media print` styles ain't play nicely when printing.
+                                     */
+                                    var $patchedStyle = $('<style media="print">')
+                                            .text(
+                                                    'img { max-width: none !important; }' +
+                                                    'a[href]:after { content: ""; }'
+                                            )
+                                            .appendTo('head');
+
+                                    window.print();
+
+                                    $body.prepend($content);
+                                    $mapContainerParent.prepend($mapContainer);
+
+                                    $printContainer.remove();
+                                    $patchedStyle.remove();
+                                });
+                    });
+
+                })
+
+            });
+
+        }
 
     </script>
-
 {% endblock %}

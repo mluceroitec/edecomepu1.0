@@ -30,7 +30,9 @@
             <h4 class="title text-center">Problematica</h4>
             <p class="category text-center">Completar los campos</p>
         </div>
-        <div class="card content">
+        <br>
+        <br>
+        <div class="">
             {{ form_start(edit_form) }}
             <div class="col-sm-3">
                 <div class="form-group label-floating">
@@ -43,8 +45,20 @@
                 <div class="form-group label-floating">
                     <label class="control-label">N°</label>
                     {{ form_widget(edit_form.altura, { 'attr': {'class':'form-control'}})}}
+
                 </div>
             </div>
+            <div class="col-sm-3">
+
+                <div class="form-group label-floating">
+                        <a class="btn btn-sm btn-primary" id="target" >Precione para verificar domicilio </a>
+                            <span class="text-success text-center " id="span1"></span>
+                            <span class="text-danger" id="span2"></span>
+
+
+                </div>
+            </div>
+
 
             <div class="col-sm-2" style="display: none">
                 <div class="form-group label-floating">
@@ -108,7 +122,7 @@
 
     <input class="btn btn-primary btn-round pull-right " id="action" type="submit" value="Guardar" />
     {{ form_end(edit_form) }}
-    <a class="btn btn-primary btn-round pull-left" href="{{ path('admin_problematica_index') }}">Ir al listado</a>
+    <a class="btn btn-primary btn-round pull-left " href="{{ path('admin_problematica_index') }}">Ir al listado</a>
     <li>
         {{ form_start(delete_form) }}
         <input  class="btn btn-primary pull-left btn-danger" type="submit" value="Delete">
@@ -137,14 +151,41 @@
 
 
     <script>
+        $( "#target" ).click(function() {
+            var calle=$('#appbundle_problematica_calle').val();
+            var numero=$('#appbundle_problematica_altura').val();
+            $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
+                if (json.status=="OK"){
+                    $('#span2').hide();
+                    $('#span1').show();
+                    $('#action').show();
+                    document.getElementById('target').style.backgroundColor= '#388e3c';
+
+                    document.getElementById('span1').innerHTML = "Domicilio correcto.";
+
+                }else{
+                    $('#span1').hide();
+                    $('#span2').show();
+                    $('#action').hide();
+                    document.getElementById('target').style.backgroundColor= '#d84315';
+
+                    document.getElementById('span2').innerHTML = "Domicilio incorrecto.";
+
+                }
+
+            });
+
+
+
+        });
 
         $(document).ready(function ( ) {
             $('#action').click(function () {
                 console.log("hola nata");
                 //var selectedoption=$('#appbundle_problematica_domicilio').val();
                 //console.log(selectedoption);
-                var calle=$('#appbundle_problematica_localidad').val();
-                var numero=$('#appbundle_problematica_numero').val();
+                var calle=$('#appbundle_problematica_calle').val();
+                var numero=$('#appbundle_problematica_altura').val();
                 $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
                     console.log(json.results[0].geometry.location.lat);
                     console.log(json.results[0].geometry.location.lng);

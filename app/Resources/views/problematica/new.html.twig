@@ -21,14 +21,15 @@
             <h3 class="title text-center">Problematica</h3>
             <h4 class=" text-center">Completar los campos</h4>
         </div>
-        <div class="card content">
+        <br><br>
+        <div class="">
             {{ form_start(form) }}
             {#<div class="col-sm-8">#}
             {#<div class="form-group">#}
             {#{{ form_widget(form.clie_nombre, { 'attr': {'class':'form-control','placeholder':'nombre'}})}}#}
             {#</div>#}
             {#</div>#}
-            <div class="col-sm-3 col-lg-offset-3">
+            <div class="col-sm-3 ">
                 <div class="form-group label-floating">
                     <label class="control-label">Calle</label>
                     {{ form_widget(form.calle, { 'attr': {'class':'form-control'}})}}
@@ -41,7 +42,16 @@
                     {{ form_widget(form.altura, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
+            <div class="col-sm-3">
 
+                <div class="form-group label-floating">
+                    <a class="btn btn-sm btn-primary" id="target" >Precione para verificar domicilio </a>
+                    <span class="text-success text-center " id="span1"></span>
+                    <span class="text-danger" id="span2"></span>
+
+
+                </div>
+            </div>
             <div class="col-sm-2" style="display: none">
                 <div class="form-group label-floating">
                     <label class="control-label">Ciudad</label>
@@ -80,14 +90,14 @@
             </div>
 
 
-            <div class="col-sm-10 col-lg-offset-1">
+            <div class="col-sm-10 ">
                 <div class="form-group label-floating">
                     <label class="control-label ">Observacion</label>
                     {{ form_widget(form.descripcion, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
 
-            <div class="col-sm-3 col-lg-offset-4">
+            <div class="col-sm-3 ">
                 <div class="form-group label-floating">
                     <label class="control-label color">Problematica</label>
                     {{ form_widget(form.tipoproblematica, { 'attr': {'class':'form-control'}})}}
@@ -98,13 +108,14 @@
                     {{ form_widget(form.fecha, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
+            <br><br>
         </div>
-        <br><br>
 
     </div>
     <a class="btn btn-primary btn-round pull-left" href="{{ path('admin_problematica_index') }}">Ir al listado</a>
 
-    <input class="btn btn-primary btn-round pull-right" type="submit" value="Guardar" />
+    <input class="btn btn-primary btn-round pull-right" type="submit" id="action" value="Guardar" />
+
 
     {{ form_end(form) }}
 
@@ -132,12 +143,41 @@
 
     <script>
 
+        $( "#target" ).click(function() {
+            var calle=$('#appbundle_problematica_calle').val();
+            var numero=$('#appbundle_problematica_altura').val();
+            $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
+                if (json.status=="OK" && calle!="" && numero!=""){
+                    $('#span2').hide();
+                    $('#span1').show();
+                    $('#action').show();
+                    document.getElementById('target').style.backgroundColor= '#388e3c';
+
+                    document.getElementById('span1').innerHTML = "Domicilio correcto.";
+
+                }else{
+                    $('#span1').hide();
+                    $('#span2').show();
+                    $('#action').hide();
+                    document.getElementById('target').style.backgroundColor= '#d84315';
+
+                    document.getElementById('span2').innerHTML = "Domicilio incorrecto.";
+
+                }
+
+            });
+
+
+
+        });
+        $('#action').hide();
+
         $(document).ready(function ( ) {
             $('#appbundle_problematica_tipoproblematica').change(function () {
                 //var selectedoption=$('#appbundle_problematica_domicilio').val();
                 //console.log(selectedoption);
-                var calle=$('#appbundle_problematica_localidad').val();
-                var numero=$('#appbundle_problematica_numero').val();
+                var calle=$('#appbundle_problematica_calle').val();
+                var numero=$('#appbundle_problematica_altura').val();
                 $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
                     console.log(json.results[0].geometry.location.lat);
                     console.log(json.results[0].geometry.location.lng);
