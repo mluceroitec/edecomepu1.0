@@ -1,25 +1,3 @@
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block body %}#}
-    {#<h1>Problematica edit</h1>#}
-
-    {#{{ form_start(edit_form) }}#}
-        {#{{ form_widget(edit_form) }}#}
-        {#<input type="submit" value="Edit" />#}
-    {#{{ form_end(edit_form) }}#}
-
-    {#<ul>#}
-        {#<li>#}
-            {#<a href="{{ path('admin_problematica_index') }}">Back to the list</a>#}
-        {#</li>#}
-        {#<li>#}
-            {#{{ form_start(delete_form) }}#}
-                {#<input type="submit" value="Delete">#}
-            {#{{ form_end(delete_form) }}#}
-        {#</li>#}
-    {#</ul>#}
-{#{% endblock %}#}
-
 {% extends 'base.html.twig' %}
 
 
@@ -27,7 +5,7 @@
 {% block body %}
     <div class="card">
         <div class="card-header" data-background-color="purple">
-            <h4 class="title text-center">Problematica</h4>
+            <h4 class="title text-center">Problemática</h4>
             <p class="category text-center">Completar los campos</p>
         </div>
         <br>
@@ -154,7 +132,7 @@
         $( "#target" ).click(function() {
             var calle=$('#appbundle_problematica_calle').val();
             var numero=$('#appbundle_problematica_altura').val();
-            $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
+            $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610&libraries", function( json ) {
                 if (json.status=="OK"){
                     $('#span2').hide();
                     $('#span1').show();

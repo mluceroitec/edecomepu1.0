@@ -44,10 +44,9 @@ class ProblematicaController extends Controller
         $problematica = new Problematica();
         $form = $this->createForm('AppBundle\Form\ProblematicaType', $problematica);
         $form->get('pais')->setData("Argentina");
-        $form->get('ciudad')->setData("Rio Cuarto");
+        $form->get('ciudad')->setData("Río Cuarto");
 
-        $form->get('provincia')->setData("Cordoba");
-        $form->get('provincia')->setData("Cordoba");
+        $form->get('provincia')->setData("Córdoba");
         $form->get('fecha')->setData(new \DateTime('now'));
 
 
