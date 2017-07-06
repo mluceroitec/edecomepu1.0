@@ -1,0 +1,69 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+<body class="login-page">
+<!-- Navbar -->
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url('')"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                <form class="form" action="{{ path("fos_user_security_check") }}" method="post">
+                    <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            <img src="http://www.riocuarto.gov.ar/assets/images/brand/brand-edecom.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="content  ">
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            <input  class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="Nombre de usuario">
+                        </div>
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                </span>
+                            <input type="password" placeholder="Contraseña" class="form-control " id="password" name="_password" required="required"/>
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <input class="btn btn-succes verde btn-round btn-lg btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+                        {#<a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>#}
+                    </div>
+                    <div class="pull-right">
+                        <h6>
+                            <a href="{{ path("fos_user_registration_register") }}" class="link">Crear cuenta</a>
+                        </h6>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+
+            <div class="copyright">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Diseñado por
+                <a href="https://www.facebook.com/manulucer0" target="_blank">Manuel Lucero </a>y
+                <a href="https://www.facebook.com/ncarinao" target="_blank"> Natanael Carinao</a>.
+            </div>
+        </div>
+    </footer>
+</div>
+</body>

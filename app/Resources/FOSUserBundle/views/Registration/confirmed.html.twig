@@ -1,0 +1,61 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+{% block fos_user_content %}
+
+<body class="login-page">
+<!-- Navbar -->
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url()"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                {#{{ form_widget(form) }}#}
+
+                <div class="header header-primary text-center">
+                    <div class="logo-container">
+                        {#<img src="{{ asset('assets/img/gobierno_rio_cuarto_chico (1).png') }}" alt="">#}
+
+                        <img src="http://www.riocuarto.gov.ar/assets/images/brand/brand-edecom.svg" alt="">
+                    </div>
+                </div>
+                <div class="content">
+
+                    <div class="input-group form-group-no-border input-lg">
+
+
+                    </div>
+                    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                    {% if targetUrl %}
+                        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                    {% endif %}
+                    <div class="footer text-center">
+                        <a class="btn verde blanco btn-round btn-lg btn-block" href="{{ path('admin_problematica_index') }}">Iniciar</a>
+
+                        {#<a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>#}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+
+            <div class="copyright">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Diseñado por
+                <a href="https://www.facebook.com/manulucer0" target="_blank">Manuel Lucero </a>y
+                <a href="https://www.facebook.com/ncarinao" target="_blank"> Natanael Carinao</a>.
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+{% endblock fos_user_content %}

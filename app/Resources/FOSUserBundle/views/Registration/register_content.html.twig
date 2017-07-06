@@ -1,0 +1,87 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{#{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
+    {#{{ form_widget(form) }}#}
+    {#<div>#}
+        {#<input type="submit" value="{{ 'registration.submit'|trans }}" />#}
+    {#</div>#}
+{#{{ form_end(form) }}#}
+
+
+
+<body class="login-page">
+<!-- Navbar -->
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url()"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form'}}) }}
+                {#{{ form_widget(form) }}#}
+
+                <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            {#<img src="{{ asset('assets/img/gobierno_rio_cuarto_chico (1).png') }}" alt="">#}
+
+                            <img src="http://www.riocuarto.gov.ar/assets/images/brand/brand-edecom.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="content">
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_errors(form.username) }}
+
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                </span>
+                            {{ form_widget(form.email,{'attr':{'class':'form-control','placeholder':'Email','required':'required'}}) }}
+                        </div>
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            {{ form_widget(form.username,{'attr':{'class':'form-control','placeholder':'Apellido y Nombre','required':'required'}}) }}
+
+                        </div>
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                </span>
+                            {{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control','placeholder':'Contraseña','required':'required'}}) }}
+
+                        </div>
+                        <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                </span>
+                            {{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control','placeholder':'Repita contraseña','required':'required'}}) }}
+
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <input class="btn verde btn-round btn-lg btn-block" type="submit" value="{{ 'registration.submit'|trans }}" />
+
+                        {#<a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>#}
+                    </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+
+            <div class="copyright">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Diseñado por
+                <a href="https://www.facebook.com/manulucer0" target="_blank">Manuel Lucero </a>y
+                <a href="https://www.facebook.com/ncarinao" target="_blank"> Natanael Carinao</a>.
+            </div>
+        </div>
+    </footer>
+</div>
+</body>

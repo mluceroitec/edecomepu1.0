@@ -22,6 +22,8 @@ class DefaultController extends Controller
 //        ]);
     }
 
+
+
     /**
      * @Route("/map", name="admin_problematica_mapa")
      */
@@ -100,5 +102,52 @@ class DefaultController extends Controller
 
 
     }
+    /**
+     * @Route("/inicio", name="inicio")
+     */
+    public function precentacionAction(Request $request)
+    {
 
+        $em = $this->getDoctrine()->getManager();
+//        $repo= $em->getRepository('AppBundle:Posteo')->findBy([], ['fecha' => 'DESC']);
+
+        $users = $em->getRepository('AppBundle:User')->findAll();
+
+
+        return $this->render('default/index.html.twig', array(
+            'users' => $users,
+        ));
+    }
+    /**
+     * @Route("/Role", name="role")
+     * @Method({"GET", "POST"})
+     */
+    public function changeRolnAction(Request $request)
+    {
+        $id = $request->request->get('id');
+
+
+        $em = $this->getDoctrine()->getManager();
+//        $repo= $em->getRepository('AppBundle:Posteo')->findBy([], ['fecha' => 'DESC']);
+
+        $users = $em->getRepository('AppBundle:User')->find($id);
+        $roles=$users->getRoles();
+        $mns="";
+        if ((in_array("ROLE_ADMIN", $roles )and !empty($roles))){
+            $users->removeRole('ROLE_ADMIN');
+            $mns="ROL REMOVIDO";
+
+        }
+        else{
+            $users->addRole("ROLE_ADMIN");
+            $mns="ROL AGREGADO";
+
+
+        }
+        $em->persist($users);
+        $em->flush();
+        return new JsonResponse($mns);
+
+
+    }
 }

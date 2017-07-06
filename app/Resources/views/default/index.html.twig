@@ -1,34 +1,151 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
+                        {% if app.user.username=="poloni yamil" %}
+
+<div  class="card">
+        <div class="card-header" data-background-color="purple" >
+                <h3 class="title text-center">USUARIOS </h3>
+                <h4 class="category text-center "></h4>
+        </div>
+        {#<input type="search" class="" aria-controls="example"/>#}
+        <div class="card content ">
+                <br>
+                <br>
+                <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group  is-empty">
+                                <input type="text" class="form-control" id="kwd_search" placeholder="Buscador">
+                                <span class="material-input"></span>
+                        </div>
+                        <a type="submit" class="btn btn-white btn-round btn-just-icon">
+                                <i class="material-icons ">search</i><div class="ripple-container"></div>
+                        </a>
+                </form>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <table class="table responsive-table " id="my-table" >
+                        <thead class="text-primary">
+                        <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Ultimo inicio</th>
+                                <th class="text-center">Roles  <i rel="tooltip" title="Apreta F5 o actualiza la pagina si edito algun rol " class="material-icons">info</i></th>
+                                <th class="">Agregar Rol Admin</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                                <tr>
+                                        <td class="text-center">{{ user.username }}</td>
+                                        <td class="text-center">{{ user.email }}</td>
+                                        <td class="text-center">{% if user.lastLogin %}{{ user.lastLogin|date('d-m-Y') }}{% endif %}</td>
+                                        <td class="text-center">
+                                                <select>
+                                                        {% for roles in user.roles %}
+                                                                <option value="1">{{ roles }}</option>
+                                                        {% endfor %}
+                                                </select>
+
+
+                                        </td>
+                                        <td class="text-center">
+                                                <div class="checkbox text-center">
+                                                        <label>
+                                                                <p class="text-success" id="{{ user.id }}"></p>
+
+                                                                {% if user.roles[0]=="ROLE_ADMIN" %}
+                                                                        <input onclick="agregar_rol({{ user.id }})" class="text-center" type="checkbox" name="optionsCheckboxes" checked>
+                                                                {% else %}
+                                                                        <input onclick="agregar_rol({{ user.id }})" class="text-center" type="checkbox" name="optionsCheckboxes" >
+
+                                                                {% endif %}
+
+
+                                                        </label>
+
+
+                                                </div>
+                                        </td>
+
+
+
+
+
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+        </div>
+</div>
+                        {% else %}
+                                <p>Usted no tiene permiso para acceder a esta url</p>
+
+        {% endif %}
 
 {% endblock %}
+    {% block javascripts %}
 
-{% block stylesheets %}
-<style>
-    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
-    h1 { font-size: 36px; }
-    h2 { font-size: 21px; margin-bottom: 1em; }
-    p { margin: 0 0 1em 0; }
-    a { color: #0000F0; }
-    a:hover { text-decoration: none; }
-    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
-    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
-    #container { padding: 2em; }
-    #welcome, #status { margin-bottom: 2em; }
-    #welcome h1 span { display: block; font-size: 75%; }
-    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
-    #icon-book { display: none; }
+            <script>
+                    function agregar_rol(id) {
+                            var id= id;
 
-    @media (min-width: 768px) {
-        #wrapper { width: 80%; margin: 2em auto; }
-        #icon-book { display: inline-block; }
-        #status a, #next a { display: block; }
+                            console.log(id);
+                            $(document).ready(function () {
+                                    $.ajax({
+                                            type: "POST",
+                                            url: "{{ path ("role") }}",
+                                            data: {id:id}
+                                    }).done(function (data) {
+                                            var marcadores= JSON.stringify(data);
+                                            var obj = $.parseJSON(marcadores);
+                                            console.log(obj);
+                                            if (obj=="ROL AGREGADO"){
+                                                    $('#span2').hide();
+                                                    $('#span1').show();
+                                                    document.getElementById(id).style.color='green';
 
-        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
-    }
-</style>
-{% endblock %}
+                                                    document.getElementById(id).innerHTML = obj;
+
+                                            }
+                                            else {
+                                                    $('#span1').hide();
+                                                    $('#span2').show();
+                                                    document.getElementById(id).style.color='red';
+
+                                                    document.getElementById(id).innerHTML = obj;
+                                            }
+
+                                    })
+                            });
+
+                    }
+
+
+                    $(document).ready(function(){
+                            $("#kwd_search").keyup(function(){
+                                    if( $(this).val() != "")
+                                    {
+                                            $("#my-table tbody>tr").hide();
+                                            $("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+                                    }
+                                    else
+                                    {
+                                            $("#my-table tbody>tr").show();
+                                    }
+                            });
+                    });
+                    $.extend($.expr[":"],
+                            {
+                                    "contains-ci": function(elem, i, match, array)
+                                    {
+                                            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                                    }
+                            });
+            </script>
+
+    {% endblock %}
