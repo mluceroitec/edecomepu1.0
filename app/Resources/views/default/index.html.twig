@@ -34,6 +34,7 @@
                                 <th class="text-center">Ultimo inicio</th>
                                 <th class="text-center">Roles  <i rel="tooltip" title="Apreta F5 o actualiza la pagina si edito algun rol " class="material-icons">info</i></th>
                                 <th class="">Agregar Rol Admin</th>
+                                <th class="text-center">Eliminar</th>
 
 
                         </tr>
@@ -53,10 +54,10 @@
 
 
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center col-sm-2">
                                                 <div class="checkbox text-center">
-                                                        <label>
-                                                                <p class="text-success" id="{{ user.id }}"></p>
+                                                        <label class="text-center">
+                                                                <p class="text-success text-center" id="{{ user.id }}"></p>
 
                                                                 {% if user.roles[0]=="ROLE_ADMIN" %}
                                                                         <input onclick="agregar_rol({{ user.id }})" class="text-center" type="checkbox" name="optionsCheckboxes" checked>
@@ -71,7 +72,9 @@
 
                                                 </div>
                                         </td>
-
+                                        <td class="text-center" >
+                                                <a href="{{ path('deleteaction', { 'id':user.id}) }}">Eliminar</a>
+                                        </td>
 
 
 

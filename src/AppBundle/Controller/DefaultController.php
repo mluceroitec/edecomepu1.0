@@ -150,4 +150,28 @@ class DefaultController extends Controller
 
 
     }
+    /**
+     * @Route("/deleteaction", name="deleteaction")
+     * @Method({"GET", "POST"})
+     */
+
+    public function deleteAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id = $request->get('id');
+        $username = $this->getUser()->getUsername();
+        if ($username=="admin"){
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+
+            $em->remove($user);
+            $em->flush();
+        }
+
+
+        $users = $em->getRepository('AppBundle:User')->findAll();
+
+        return $this->render('default/index.html.twig', array(
+            'users' => $users,
+        ));
+    }
 }
