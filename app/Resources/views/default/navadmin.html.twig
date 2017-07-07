@@ -1,5 +1,5 @@
 
-    <div class="sidebar" data-color="purple" data-image="">
+    <div class="sidebar" filter-color="orange" data-image="">
         {#<div class="sidebar" data-color="purple" data-image="{{ asset('assets/img/google-maps-new-interface.jpg') }}">#}
 
         <!--
@@ -9,33 +9,36 @@
         -->
 
         <div class="logo">
-            <a  class="simple-text">
+            <a  class="simple-text text-black">
                 Administración
 
             </a>
-
         </div>
 
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li >
+                    <hr>
+
                     <a class="color">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <i class="material-icons color">face</i>
+                            <i class="material-icons color verde">face</i>
+                            <p class="text-black">
+                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
 
-                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                            </p>
 
 
 
                             {% else %}
-                                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a  href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                             {% endif %}
 
                     </a>
                 </li>
                 <li >
                     <a href="{{ path('fos_user_profile_edit')}}">
-                        <i class="material-icons">perm_identity
+                        <i class="material-icons verde">perm_identity
                         </i>
 
                         <p class="control-label">Editar perfil.</p>
@@ -43,7 +46,7 @@
                 </li>
                 <li >
                     <a href="{{ path('fos_user_change_password')}}">
-                        <i class="material-icons">https</i>
+                        <i class="material-icons verde">https</i>
 
                         <p class="control-label">Editar contraseña.</p>
                     </a>
@@ -51,7 +54,7 @@
                 {% if app.user.username=="poloni yamil" %}
                     <li >
                         <a href="{{ path('inicio')}}">
-                            <i class="material-icons">settings</i>
+                            <i class="material-icons verde">settings</i>
 
                             <p class="control-label">Admin.. de usuarios.</p>
                         </a>
@@ -67,7 +70,7 @@
                 {#</li>#}
                 <li >
                     <a href="{{ path('admin_problematica_index')}}">
-                        <i class="material-icons">bubble_chart</i>
+                        <i class="material-icons verde">bubble_chart</i>
 
                         <p class="control-label">Problematicas.</p>
                     </a>
@@ -76,7 +79,7 @@
 
                 <li>
                     <a href="{{ path ('admin_problematica_new') }}">
-                        <i class="material-icons">create</i>
+                        <i class="material-icons verde">create</i>
                         <p class="control-label">Alta de Problematicas.</p>
                     </a>
                 </li>
@@ -84,21 +87,20 @@
 
                 <li>
                     <a href="{{ path ('admin_problematica_mapa') }}">
-                        <i class="material-icons">satellite</i>
-                        <p class="control-label">Mapa.</p>
+                        <i class="material-icons verde">satellite</i>
+                        <p class="control-label ">Mapa.</p>
 
                     </a>
                 </li>
                 <hr>
                 <li>
-                    <a class="text-danger" href="{{ path('fos_user_security_logout') }}">
+                    <a class="" href="{{ path('fos_user_security_logout') }}">
                         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        <i class="material-icons text-danger">reply
+                        <i class="material-icons verde">reply
                         </i>
 
                     </a>
                 </li>
-                <hr>
 
             </ul>
         </div>
