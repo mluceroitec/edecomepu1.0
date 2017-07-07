@@ -137,6 +137,11 @@
                     $('#span2').hide();
                     $('#span1').show();
                     $('#action').show();
+                    //document.getElementById("valores").value = mensaje;
+                    document.getElementById("appbundle_problematica_longitud").value =(json.results[0].geometry.location.lng) ;
+
+                    document.getElementById("appbundle_problematica_latitud").value =(json.results[0].geometry.location.lat) ;
+
                     document.getElementById('target').style.backgroundColor= '#388e3c';
 
                     document.getElementById('span1').innerHTML = "Domicilio correcto.";
