@@ -41,17 +41,17 @@
                         <i class="material-icons verde">perm_identity
                         </i>
 
-                        <p class="control-label">Editar perfil.</p>
+                        <p class="control-label">Editar perfil</p>
                     </a>
                 </li>
                 <li >
                     <a href="{{ path('fos_user_change_password')}}">
                         <i class="material-icons verde">https</i>
 
-                        <p class="control-label">Editar contraseña.</p>
+                        <p class="control-label">Editar contraseña</p>
                     </a>
                 </li>
-                {% if app.user.username=="poloni yamil" %}
+                {% if app.user.username=="admin" %}
                     <li >
                         <a href="{{ path('inicio')}}">
                             <i class="material-icons verde">settings</i>
@@ -72,7 +72,7 @@
                     <a href="{{ path('admin_problematica_index')}}">
                         <i class="material-icons verde">bubble_chart</i>
 
-                        <p class="control-label">Problematicas.</p>
+                        <p class="control-label">Problemáticas</p>
                     </a>
                 </li>
                 <li class="divider"></li>
@@ -81,6 +81,7 @@
                     <a href="{{ path ('admin_problematica_new') }}">
                         <i class="material-icons verde">create</i>
                         <p class="control-label">Alta de Problematicas.</p>
+
                     </a>
                 </li>
                 <li class="divider"></li>
@@ -89,6 +90,7 @@
                     <a href="{{ path ('admin_problematica_mapa') }}">
                         <i class="material-icons verde">satellite</i>
                         <p class="control-label ">Mapa.</p>
+
 
                     </a>
                 </li>

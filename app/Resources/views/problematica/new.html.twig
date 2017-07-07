@@ -18,7 +18,7 @@
 {% block body %}
     <div class="card">
         <div class="card-header" data-background-color="purple">
-            <h3 class="title text-center">Problematica</h3>
+            <h3 class="title text-center">Problemática</h3>
             <h4 class=" text-center">Completar los campos</h4>
         </div>
         <br><br>
@@ -32,7 +32,8 @@
             <div class="col-sm-3 ">
                 <div class="form-group label-floating">
                     <label class="control-label">Calle</label>
-                    {{ form_widget(form.calle, { 'attr': {'class':'form-control'}})}}
+                    {{ form_widget(form.calle, { 'attr': {'class':'form-control', onchange:'calle()'}})}}
+
                 </div>
             </div>
             <div class="col-sm-2">
@@ -99,7 +100,7 @@
 
             <div class="col-sm-3 ">
                 <div class="form-group label-floating">
-                    <label class="control-label color">Problematica</label>
+                    <label class="control-label color">Problemática</label>
                     {{ form_widget(form.tipoproblematica, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
@@ -178,7 +179,7 @@
                 //console.log(selectedoption);
                 var calle=$('#appbundle_problematica_calle').val();
                 var numero=$('#appbundle_problematica_altura').val();
-                $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries", function( json ) {
+                $.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?address="+numero+"+"+calle+"+rio cuarto+cordoba+argentina+&key=AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610&libraries", function( json ) {
                     console.log(json.results[0].geometry.location.lat);
                     console.log(json.results[0].geometry.location.lng);
 
@@ -191,6 +192,14 @@
                 });
             })
         });
+
+        function calle() {
+            var x = document.getElementById("appbundle_problematica_calle");
+            x.value = x.value.toLowerCase();
+            x.value=x.value.split(' ').map(function(word){
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join(' ');
+        }
 
     </script>
 {% endblock %}

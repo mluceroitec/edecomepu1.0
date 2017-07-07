@@ -3,8 +3,8 @@
 {% block body %}
     <div  class="card">
         <div class="card-header" data-background-color="purple" >
-            <h3 class="title text-center">Problematicas </h3>
-            <h4 class="category text-center ">Aqui se encuentran todas las problematicas.</h4>
+            <h3 class="title text-center">Problemáticas </h3>
+            <h4 class="category text-center ">Aqui se encuentran todas las problemáticas.</h4>
         </div>
         {#<input type="search" class="" aria-controls="example"/>#}
         <div class="card content ">
@@ -29,7 +29,7 @@
                 <thead class="text-primary">
                 <tr>
                     <th></th>
-                    <th class="text-center">Problematica</th>
+                    <th class="text-center">Problemática</th>
                     <th class="text-center">Calle</th>
                     <th class="text-center">Altura</th>
                     <th class="text-center">Ciudad</th>
@@ -51,10 +51,10 @@
                         <td class="text-center">{% if problematica.fecha %}{{ problematica.fecha|date('d-m-Y') }}{% endif %}</td>
                         <td class="text-center">{% if problematica.fecha %}{{ problematica.fecha|date('H:i') }}{% endif %}</td>
                         <td class="text-center">
-                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras ver los detalles de la problematica " href="{{ path('admin_problematica_show', { 'id': problematica.id }) }}"><i class="material-icons">remove_red_eye</i></a>
+                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras ver los detalles de la problemática " href="{{ path('admin_problematica_show', { 'id': problematica.id }) }}"><i class="material-icons">remove_red_eye</i></a>
                         </td >
                         <td class="text-center" >
-                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras editar los campos de la problematica "href="{{ path('admin_problematica_edit', { 'id': problematica.id }) }}"><i class="material-icons">create</i></a>
+                            <a alt="Creative Tim Logo" rel="tooltip" title="Con esta opcion podras editar los campos de la problemática "href="{{ path('admin_problematica_edit', { 'id': problematica.id }) }}"><i class="material-icons">create</i></a>
 
                         </td>
                     </tr>
@@ -65,7 +65,7 @@
     </div>
 
 
-    <a class="btn btn-primary btn-round center-block" href="{{ path('admin_problematica_new') }}">Cargar nueva problematica</a>
+    <a class="btn btn-primary btn-round center-block" href="{{ path('admin_problematica_new') }}">Cargar nueva problemática</a>
 
 {% endblock %}
     {% block javascripts %}

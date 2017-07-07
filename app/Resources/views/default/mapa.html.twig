@@ -14,11 +14,11 @@
 
          <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
          <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}"></script>
-         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV5eAN00x_NQQRncHIo0rmTXxiE9B4iWw&libraries=geometry,places"></script>
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610&libraries=geometry,places"></script>
          <style>
              .map-container {
-                 height: 500px;
-                 width: 700px;
+                 height: 560px;
+                 width: 1000px;
                  margin: 0% 4%;
              }
              li{
@@ -31,6 +31,10 @@
      {% endblock %}
 {% block body %}
 
+
+    <div class="map-container col-sm-12" id="mod">
+
+    </div>
     <div class="sidebar-wrapper">
         <ul class="card">
             <div class="col-sm-3  ">
@@ -45,10 +49,8 @@
                         <option value="5">Transito</option>
                         <option value="6">Espacios Verdes</option>
                         <option value="7">Todo las problematicas</option>
-
                     </select>
                 </div>
-
             </div>
             <div class="col-sm-3 ">
                 <div class="form-group label-floating divsRadios">
@@ -58,10 +60,6 @@
                 </div>
             </div>
         </ul>
-
-    </div>
-
-    <div class="map-container">
 
     </div>
 
@@ -123,6 +121,8 @@
                             // printAnyMaps :: _ -> HTML
                             function printAnyMaps() {
                                 var $body = $('body');
+                                document.getElementById("mod").style.width = 2300;
+                                document.getElementById("mod").style.height = 1000;
                                 var $mapContainer = $('.map-container');
                                 var $mapContainerParent = $mapContainer.parent();
                                 var $printContainer = $('<div style="position:relative;">');
