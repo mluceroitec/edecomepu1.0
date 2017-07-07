@@ -31,10 +31,13 @@
                     </div>
                     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
                     {% if targetUrl %}
-                        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        <h4 class="text-danger"><a>Atencion!!</a></h4>
                     {% endif %}
+                    <p class="">
+                        Recuerda que debes esperar que el administrador te de permiso de acceder.
+                    </p>
                     <div class="footer text-center">
-                        <a class="btn verde blanco btn-round btn-lg btn-block" href="{{ path('admin_problematica_index') }}">Iniciar</a>
+                        <a class="btn verde blanco btn-round btn-lg btn-block" href="{{ path('fos_user_security_login') }}">Iniciar</a>
 
                         {#<a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>#}
                     </div>
