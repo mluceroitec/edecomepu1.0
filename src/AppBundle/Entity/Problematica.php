@@ -86,6 +86,29 @@ class Problematica
 
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_estado", type="datetime")
+     */
+    private $fecha_estado;
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaEstado()
+    {
+        return $this->fecha_estado;
+    }
+
+    /**
+     * @param \DateTime $fecha_estado
+     */
+    public function setFechaEstado($fecha_estado)
+    {
+        $this->fecha_estado = $fecha_estado;
+    }
+    
+    /**
      * Get id
      *
      * @return int
@@ -340,4 +363,10 @@ class Problematica
     {
         return $this->tipoproblematica;
     }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Estado", inversedBy="problematicas")
+     * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
+     */
+    private $estado;
 }
