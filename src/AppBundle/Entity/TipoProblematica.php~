@@ -105,5 +105,42 @@ class TipoProblematica
     {
         $this->problematica = new ArrayCollection();
     }
-}
 
+    /**
+     * Add problematica
+     *
+     * @param \AppBundle\Entity\Problematica $problematica
+     *
+     * @return TipoProblematica
+     */
+    public function addProblematica(\AppBundle\Entity\Problematica $problematica)
+    {
+        $this->problematica[] = $problematica;
+
+        return $this;
+    }
+
+    /**
+     * Remove problematica
+     *
+     * @param \AppBundle\Entity\Problematica $problematica
+     */
+    public function removeProblematica(\AppBundle\Entity\Problematica $problematica)
+    {
+        $this->problematica->removeElement($problematica);
+    }
+
+    /**
+     * Get problematica
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProblematica()
+    {
+        return $this->problematica;
+    }
+
+    public function __toString(){
+        return (string) $this->nombre;
+    }
+}

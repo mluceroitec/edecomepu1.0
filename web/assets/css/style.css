@@ -63,6 +63,16 @@ background-color: black !important;}
     background-color: rgba(0, 0, 0, 0.5);
 
 }
+.position{
+    position: fixed;
+    
+}
+.sidebar{
+    background: #FFFFFF;
+}
+.fondo{
+    background: #FFFFFF;
+}
 /*.sidebar-wrapper {*/
     /*background: rgba(227, 227, 227, 0.26);*/
     /*!* For browsers that do not support gradients *!*/

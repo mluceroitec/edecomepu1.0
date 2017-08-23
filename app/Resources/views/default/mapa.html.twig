@@ -17,9 +17,9 @@
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyCX2-eJssZgvNucxJBPMKYpyTTaVa610&libraries=geometry,places"></script>
          <style>
              .map-container {
-                 height: 560px;
-                 width: 1000px;
-                 margin: 0% 4%;
+                 height: 650px;
+                 width: 750px;
+                 margin: 0% 0%;
              }
              li{
                  list-style:none;
@@ -31,37 +31,150 @@
      {% endblock %}
 {% block body %}
 
+    {#<a href="#myModal" role="button" class="btn btn-primary btn-round text-center" data-toggle="modal">Filtros de busqueda <i class="material-icons">build</i></a>#}
 
-    <div class="map-container col-sm-12" id="mod">
+
+    {#<div class="col-sm-12">#}
+        {#<div id="myModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-dismiss="modal" data-backdrop="false">#}
+            {#<div class="modal-dialog">#}
+                {#<div class="modal-content ">#}
+                    {#<div class="card">#}
+                        {#<div class="modal-body col-sm-12 col-sm-offset-1">#}
+
+                        {#</div>#}
+
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+
+
+
+    <div class="map-container col-sm-10 " id="mod" >
 
     </div>
-    <div class="sidebar-wrapper">
-        <ul class="card">
-            <div class="col-sm-3  ">
-                <div class="form-group label-floating divsRadios">
-                    <label class="control-label">Problematicas</label>
-                    <select id="mySelect" onchange="myFunction()" class="form-control">
-                        <option value></option>
-                        <option value="1">Luminarias</option>
-                        <option value="2">Obras Publicas</option>
-                        <option value="3">Higiene Urbana</option>
-                        <option value="4">Seguridad</option>
-                        <option value="5">Transito</option>
-                        <option value="6">Espacios Verdes</option>
-                        <option value="7">Todo las problematicas</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3 ">
-                <div class="form-group label-floating divsRadios">
-                    <div id="imprimir  ">
-                        <button class="map-print btn  btn-primary">Imprimir mapa</button>
+
+    <div class="sidebar col-sm-3 col-sm-offset-9 position "  id="mostrar" filter-color="orange" data-image="">
+        <div class="logo">
+            <a  class="simple-text text-black">
+                Administración
+
+            </a>
+        </div>
+
+        <div class="sidebar-wrapper">
+
+            <form action="">
+                <ul>
+                    <br>
+                    <li>
+                        Desde:<br>
+                        <input class=" " id="desde" type="date" name="desde" value="desde"><br>
+                    </li>
+                    <br>
+                    <li>
+                      Hasta:<br>
+                      <input id="hasta" type="date" name="hasta" value="hasta"><br><br>
+                    </li>
+                    <li class="col-sm-9 ">
+                        <div class="form-group  is-empty ">
+                            <div class="form-group label-floating divsRadios">
+                                <label class="control-label">Estado</label>
+                                <select  id="estado" name="estado"  onchange="" class="form-control">
+                                    <option value></option>
+                                    <option value="1">Pendientes</option>
+                                    <option value="2">Resueltas</option>
+                                    <option value="3">Anuladas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group  is-empty">
+                            <div class="form-group label-floating divsRadios">
+                                <label class="control-label">Problematicas</label>
+                                <select id="problematica" name="problematica" class="form-control">
+                                    <option value></option>
+                                    <option value="1">Luminarias</option>
+                                    <option value="2">Obras Publicas</option>
+                                    <option value="3">Higiene Urbana</option>
+                                    <option value="4">Seguridad</option>
+                                    <option value="5">Transito</option>
+                                    <option value="6">Espacios Verdes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </li>
+                    <br>
+                    <div class="col-sm-9 ">
+                        <li>
+                            <div class=" text-center">
+                                <a  onclick="myFunction()" class="btn btn-round  btn-success"><i class="material-icons">search</i>Buscar</a>
+
+                            </div>
+                        </li>
+
+                        <br>
+                        <li>
+                            <div class=" text-center">
+                                <a class="btn btn-round   btn-success" href="{{ path ('admin_problematica_mapa') }}">
+                                        Restablecer
+
+                                </a>
+
+                            </div>
+
+                        </li>
+                        <br>
+                        <li>
+                            <h4  class="simple-text text-black">
+                                IMPRIMIR MAPA
+                            </h4>
+                        </li>
+                        <hr>
+                        <br>
+                        <li class=" text-center">
+                            <div id="imprimir  ">
+                                <button class="map-print btn btn-round  btn-primary">                                <i class="material-icons">print</i>
+                                    Imprimir</button>
+                            </div>
+                        </li>
                     </div>
-                </div>
-            </div>
-        </ul>
 
+            </ul>
+            </form>
+
+        </div>
     </div>
+    {#<a id="ver">Mostra</a>#}
+
+    {#<div class="sidebar-wrapper">#}
+        {#<ul class="card">#}
+            {#<div class="col-sm-3  ">#}
+                {#<div class="form-group label-floating divsRadios">#}
+                    {#<label class="control-label">Problematicas</label>#}
+                    {#<select id="mySelect" onchange="myFunction()" class="form-control">#}
+                        {#<option value></option>#}
+                        {#<option value="1">Luminarias</option>#}
+                        {#<option value="2">Obras Publicas</option>#}
+                        {#<option value="3">Higiene Urbana</option>#}
+                        {#<option value="4">Seguridad</option>#}
+                        {#<option value="5">Transito</option>#}
+                        {#<option value="6">Espacios Verdes</option>#}
+                        {#<option value="7">Todo las problematicas</option>#}
+                    {#</select>#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="col-sm-3 ">#}
+                {#<div class="form-group label-floating divsRadios">#}
+                    {#<div id="imprimir  ">#}
+                        {#<button class="map-print btn  btn-primary">Imprimir mapa</button>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</ul>#}
+
+    {#</div>#}
 
 
 
@@ -69,7 +182,17 @@
 {% endblock %}
 
 {% block javascripts %}
+
+
     <script>
+//        $('#mostrar').hide();
+
+        $("#ver").click(function(){
+            $('#mostrar').show();
+        });
+        $("#cerrar").click(function(){
+            $('#mostrar').hide();
+        });
 
 
         $(document).ready(function () {
@@ -97,11 +220,10 @@
                                 return new google.maps.Marker({
                                     position: new google.maps.LatLng(loc.latitud, loc.longitud),
                                     icon: 'assets/img/'+loc.marcador,
-                                    title:'Nombre: '+loc.nombre+' Problematica: '+loc.descripcion,
+                                    title:'Nombre: '+loc.nombre+', Problematica: '+loc.descripcion,
                                     map: map,
                                     url: 'http://www.google.com',
 
-                                    draggable:true
 
                                 });
                             })
@@ -163,12 +285,22 @@
 
         });
         function myFunction() {
-            var x = document.getElementById("mySelect").value;
+            var problematica = document.getElementById("problematica").value;
+            var desde = document.getElementById("desde").value;
+            var hasta = document.getElementById("hasta").value;
+            var estado = document.getElementById("estado").value;
+            console.log(desde);
+            console.log(hasta);
+
+            console.log(problematica);
+
+            console.log(estado);
+
             $(document).ready(function () {
                 $.ajax({
                     type: "POST",
-                    url: "{{ path ("remplaza_mapaa") }}",
-                    data: {option:x}
+                    url: "{{ path ("filtradoo") }}",
+                    data: {desde:desde,hasta:hasta,problematica:problematica,estado:estado}
                 }).done(function (data) {
                     $(function () {
 
@@ -193,9 +325,9 @@
                                         infoWindow: {
                                             content: '<b>New York</b> is a state in the Northeastern and Mid-Atlantic regions of the <i>United States</i>.'
                                         },
-                                        url: 'http://www.google.com',
+                                        content: 'Aqui es donde estudio, lee mas información en:',
 
-                                        draggable:true
+                                        draggable:false
 
                                     });
                                 })
@@ -258,6 +390,7 @@
             });
 
         }
+
 
     </script>
 {% endblock %}

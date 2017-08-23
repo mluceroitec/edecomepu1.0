@@ -36,7 +36,13 @@
 
                 </div>
             </div>
+            <div class="col-sm-2">
+                <div class="form-group label-floating">
+                    <label class="control-label">Fecha de alta</label>
 
+                    {{ form_widget(edit_form.fecha, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
 
             <div class="col-sm-2" style="display: none">
                 <div class="form-group label-floating">
@@ -89,9 +95,18 @@
                     {{ form_widget(edit_form.tipoproblematica, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
-            <div style="display: none">
+            <div class="col-sm-3">
                 <div class="form-group label-floating">
-                    {{ form_widget(edit_form.fecha, { 'attr': {'class':'form-control'}})}}
+                    <label class="control-label">Estado</label>
+                    {{ form_widget(edit_form.estado, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group label-floating">
+                    <label class="control-label">Ultima actualizacion</label>
+
+                    {{ form_widget(edit_form.fecha_estado, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
         </div>
@@ -103,7 +118,7 @@
     <a class="btn btn-primary btn-round pull-left " href="{{ path('admin_problematica_index') }}">Ir al listado</a>
     <li>
         {{ form_start(delete_form) }}
-        <input  class="btn btn-primary pull-left btn-danger" type="submit" value="Delete">
+        <input  class="btn btn-danger pull-left btn-danger" type="submit" value="Delete">
         {{ form_end(delete_form) }}
     </li>
     {#{{ form_start(form) }}#}

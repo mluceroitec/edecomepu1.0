@@ -1,0 +1,73 @@
+{% block stylesheets %}
+    <!--     Fonts and icons     -->
+    <link rel="icon"  href="{{ asset('assets/img/brand-edecom.png') }}" />
+
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+
+    <link rel="stylesheet"   href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+
+    <link rel="stylesheet"   href="{{ asset('assets/css/material-dashboard.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}"></script>
+
+
+
+
+{% endblock %}
+<html>
+
+    <body class="fondo">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="col-md-6 col-lg-offset-3" >
+                <div class="card card-profile">
+                      <p class="col-lg-offset-10 text-gray">10/8/2017</p>
+                    <div class="card-avatar" style="width: 30%">
+                        <a>
+                            <img class="img"  src="http://www.riocuarto.gov.ar/assets/images/brand/brand-edecom.svg" />
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <h6 class="category text-gray">Río Cuarto Cordoba Argentina</h6>
+                        <h4 class="card-title">Actualizaciones realizadas</h4>
+                        <p class="card-content text-justify text-black">
+                            *Se agregaron filtros de busquedas en las pestañas de problematicas y mapa.
+                            <br><br>
+                            *Los filtros consisten en una serie de busquedas en las cuales se podran combinar por: rango de fecha, problematica, estados o bien cada campo por separado.
+                            <br><br>
+                            *Se implemento un menu lateral en la pestaña de mapa para agilizar los filtrados y la impresion del mismo.
+                            <br><br>
+                            *Se implemento en la pesaña problematica un sistema para visualizar las problematicas con mayor facilidad, en esta prodras paginar las problematicas y verlas por grupos de 10,25,50,100 o bien todas.
+                            <br><br>
+                            *Se implemento en la pesaña problematica una serie de botones para imprimir el contenido de la tabla, tanto como en PDF,EXEL,CSV y print(impresion directa).
+                            <br><br>
+                            *Un nuevo modulo de graficos, que contiene 4 graficos, indicando: cantidad de cada problematica, las calles con mayores problematicas pendientes, los meses en los que se registraron mas problematicas y cuales son las problematicas que mas se resuelven.
+                            <br><br>
+                            *Se agrupo la configuracion del usuario en un elemento desplegable para facilitar la agilidad  y la visualización del sistema.
+
+                        </p>
+                        <br>
+                        <a href="{{ path('admin_problematica_index')}}" class="btn btn-success btn-round ">Salir</a>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="copyright col-lg-offset-5">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>, Diseñado por
+                        <a class="verde" href="https://www.facebook.com/manulucer0" target="_blank">Manuel Lucero </a>y
+                        <a  class="verde" href="https://www.facebook.com/ncarinao" target="_blank"> Natanael Carinao</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

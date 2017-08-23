@@ -10,6 +10,10 @@
         <table class="table responsive-table">
                 <br>
                 <tr>
+                    <th class="">Tipo de Problema:</th>
+                    <td>{{ problematica.tipoproblematica}}</td>
+                </tr>
+                <tr>
                     <th class="">Calle:</th>
                     <td>{{ problematica.calle }}</td>
                 </tr>
@@ -34,12 +38,13 @@
                     <td>{{ problematica.descripcion }}</td>
                 </tr>
                 <tr>
-                    <th class="">Fecha:</th>
-                    <td>{% if problematica.fecha %}{{ problematica.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <th class="">Fecha de alta:</th>
+                    <td>{% if problematica.fecha %}{{ problematica.fecha|date('Y-m-d ') }}{% endif %}</td>
                 </tr>
+
                 <tr>
-                    <th class="">Tipo de Problema:</th>
-                    <td>{{ problematica.tipoproblematica}}</td>
+                    <th class="">Ultima vez actualizado:</th>
+                    <td>{% if problematica.fechaestado %}{{ problematica.fechaestado|date('Y-m-d') }}{% endif %}</td>
                 </tr>
         </table>
     </div>

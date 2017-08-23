@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div  class="card">
+        <div class="card-header" data-background-color="purple" >
+            <h3 class="title text-center">Problemáticas </h3>
+            <h4 class="category text-center ">Graficos.</h4>
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+
+        <div class=" col-sm-12" id="imprimeme">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header " data-background-color="orange">
+                        <div class="ct-chart" id="emailsSubscriptionChart"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="title">Problematicas</h4>
+                        <p class="category text-black">Cantidad de carga de cada problematica.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats text-black">
+                            <i class="material-icons text-black ">access_time</i> Ultima actualizacion {{ "now"|date("m/d/Y") }} a las:  {{ "now"|date("H:i") }} hs.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header " data-background-color="red">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="title">Problematicas</h4>
+                        <p class="category text-black"> Cantidad de problematicas cargadas los ultimos 5 meses.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats text-black">
+                            <i class="material-icons text-black ">access_time</i> Ultima actualizacion {{ "now"|date("m/d/Y") }} a las: {{ "now"|date("H:i") }} hs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header " data-background-color="blue">
+                        <div class="ct-chart" id="completedTasksChart"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="title">Problematicas</h4>
+                        <p class="category text-black">Cantidad de problematicas resueltas de cada problematica </p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats text-black">
+                            <i class="material-icons text-black ">access_time</i> Ultima actualizacion {{ "now"|date("m/d/Y") }} a las: {{ "now"|date("H:i") }} hs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header " data-background-color="green">
+                        <div class="ct-chart" id="cuartografico"></div>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="title">Problematicas</h4>
+                        <p class="category text-black">Calles con mayores problematicas pendietes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats text-black">
+                            <i class="material-icons text-black ">access_time</i> Ultima actualizacion {{ "now"|date("m/d/Y") }} a las: {{ "now"|date("H:i") }} hs.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <script src="{{ asset('assets/js/chartist.min.js') }}"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+
+        });
+
+    </script>
+
+
+
+
+{% endblock %}

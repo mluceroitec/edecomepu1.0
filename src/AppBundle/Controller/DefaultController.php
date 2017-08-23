@@ -14,94 +14,121 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->redirectToRoute('admin_problematica_index');
+        $hoy = date('Y/m/d');
 
-//        // replace this example code with whatever you need
-//        return $this->render('default/index.html.twig', [
-//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-//        ]);
-    }
-
-
-
-    /**
-     * @Route("/map", name="admin_problematica_mapa")
-     */
-    public function testAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render(':default:mapa.html.twig');
-    }
-
-
-
-
-
-
-    /**
-     * Displays a form to edit an existing Students entity.
-     *
-     * @Route("/carga", name="carga_mapaa")
-     * @Method({"GET", "POST"})
-     */
-    public function cargamarcadores(Request $request)
-    {
-        $idproblematica = $request->request->get('id');
-        
-        $em = $this->getDoctrine()->getManager();
-        $db = $em->getConnection();
-        $query ="SELECT problematica.id,problematica.ciudad,problematica.latitud,problematica.longitud,problematica.descripcion,tipo_problematica.nombre,tipo_problematica.marcador FROM problematica INNER JOIN tipo_problematica ON problematica.tipoproblematica_id=tipo_problematica.id";
-        
-        $stmt = $db->prepare($query);
-        $params = array();
-        $stmt->execute($params);
-        $problematicas=$stmt->fetchAll();
-        
-        foreach ($problematicas as $problematica){
-            $result[]=$problematica;
+        $vencimiento='2017/08/16';
+        if ( $vencimiento >= $hoy  ){
             
+            return $this->redirectToRoute('actualizacion');
 
         }
-        return new JsonResponse($result);
+        else{
+            return $this->redirectToRoute('admin_problematica_index');
+
+        }
 
 
     }
+
+
+
+
 
     /**
-     * Displays a form to edit an existing Students entity.
-     *
-     * @Route("/remplaza", name="remplaza_mapaa")
-     * @Method({"GET", "POST"})
+     * @Route("/actualizacion", name="actualizacion")
      */
-    public function remplaza(Request $request)
+    public function actualizacion(Request $request)
     {
-        $idproblematica = $request->request->get('option');
-
-        $em = $this->getDoctrine()->getManager();
-        $db = $em->getConnection();
-        if ($idproblematica==7){
-            $query ="SELECT problematica.id,problematica.ciudad,problematica.latitud,problematica.longitud,problematica.descripcion,tipo_problematica.nombre,tipo_problematica.marcador FROM problematica INNER JOIN tipo_problematica ON problematica.tipoproblematica_id=tipo_problematica.id";
-
-        }else{
-            $query ="SELECT problematica.id,problematica.ciudad,problematica.latitud,problematica.longitud,problematica.descripcion,tipo_problematica.nombre,tipo_problematica.marcador FROM problematica INNER JOIN tipo_problematica ON problematica.tipoproblematica_id=tipo_problematica.id WHERE  tipo_problematica.id='$idproblematica'";
-
-        }
-
-        $stmt = $db->prepare($query);
-        $params = array();
-        $stmt->execute($params);
-        $problematicas=$stmt->fetchAll();
-
-        foreach ($problematicas as $problematica){
-            $result[]=$problematica;
-
-
-        }
-
-        return new JsonResponse($result);
-
+        return $this->render('default/prueba.html.twig', array(
+        ));
 
     }
+
+
+//    /**
+//     * @Route("/filtrado", name="filtrado")
+//     */
+//    public function filtrado(Request $request)
+//    {
+//        // replace this example code with whatever you need
+//        $desde = $request->get('desde');
+//        $hasta = $request->get('hasta');
+//        $estado = $request->get('estado');
+//        $problematica = $request->get('problematica');
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $error="";
+//        $problematicas="";
+////        BUSQUEDA TOTAL
+//        if (!empty($desde) and !empty($hasta) and !empty($estado) and !empty($problematica)) {
+//            $query = $em->createQuery('SELECT u FROM AppBundle:Problematica u WHERE (u.fecha BETWEEN ?1 AND ?2) AND (u.estado = ?3) AND (u.tipoproblematica=?4)');
+//            $query->setParameter(1, $desde);
+//            $query->setParameter(2, $hasta);
+//            $query->setParameter(3, $estado);
+//            $query->setParameter(4, $problematica);
+//            $problematicas = $query->getResult();
+//
+//
+//        }
+////        BUSQUEDA POR FECHA SOLA
+//        elseif (!empty($desde) and !empty($hasta) and empty($estado) and empty($problematica)){
+//            $query = $em->createQuery('SELECT u FROM AppBundle:Problematica u WHERE (u.fecha BETWEEN ?1 AND ?2)');
+//            $query->setParameter(1, $desde);
+//            $query->setParameter(2, $hasta);
+//            $problematicas = $query->getResult();
+//
+//        }
+////        BUSQUEDA POR FECHA Y ESTADO
+//        elseif (!empty($desde) and !empty($hasta) and !empty($estado) and empty($problematica)){
+//            $query = $em->createQuery('SELECT u FROM AppBundle:Problematica u WHERE (u.fecha BETWEEN ?1 AND ?2) AND (u.estado = ?3) ');
+//            $query->setParameter(1, $desde);
+//            $query->setParameter(2, $hasta);
+//            $query->setParameter(3, $estado);
+//            $problematicas = $query->getResult();
+//
+//        }
+////        BUSQUEDA POR FECHA Y TIPO DE PROBLEMATICA
+//        elseif (!empty($desde) and !empty($hasta) and empty($estado) and !empty($problematica)){
+//            $query = $em->createQuery('SELECT u FROM AppBundle:Problematica u WHERE (u.fecha BETWEEN ?1 AND ?2) AND (u.tipoproblematica=?4) ');
+//            $query->setParameter(1, $desde);
+//            $query->setParameter(2, $hasta);
+//            $query->setParameter(4, $problematica);
+//            $problematicas = $query->getResult();
+//
+//        }
+////        BUSQUEDA POR TIPO DE PROBLEMATICA Y ESTADO
+//        elseif (empty($desde) and empty($hasta) and !empty($estado) and !empty($problematica)){
+//            $query = $em->createQuery('SELECT u FROM AppBundle:Problematica u WHERE (u.estado=?3) AND (u.tipoproblematica=?4) ');
+//            $query->setParameter(3, $problematica);
+//
+//            $query->setParameter(4, $problematica);
+//            $problematicas = $query->getResult();
+//
+//        }
+//
+//        if (count($problematicas)==0){
+//            $error="No hay problematicas de ese tipo";
+//
+//        }
+//        elseif (count($problematicas)!=0){
+//            $error="";
+//        }
+//        else{
+//            $error="Error en la busqueda";
+//
+//        }
+//
+//
+//        return $this->render('problematica/index.html.twig', array(
+//            'problematicas' => $problematicas,
+//            'error'=>$error,
+//        ));
+
+
+//
+//    }
+
+
+
     /**
      * @Route("/inicio", name="inicio")
      */
@@ -118,6 +145,7 @@ class DefaultController extends Controller
             'users' => $users,
         ));
     }
+
     /**
      * @Route("/Role", name="role")
      * @Method({"GET", "POST"})
@@ -150,6 +178,7 @@ class DefaultController extends Controller
 
 
     }
+
     /**
      * @Route("/deleteaction", name="deleteaction")
      * @Method({"GET", "POST"})
@@ -174,4 +203,8 @@ class DefaultController extends Controller
             'users' => $users,
         ));
     }
+
+
+
+
 }

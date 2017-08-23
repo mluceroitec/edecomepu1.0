@@ -24,12 +24,14 @@ class ProblematicaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $error="";
 //        $repo= $em->getRepository('AppBundle:Posteo')->findBy([], ['fecha' => 'DESC']);
 
         $problematicas = $em->getRepository('AppBundle:Problematica')->findBy([], ['fecha' => 'DESC']);
 
         return $this->render('problematica/index.html.twig', array(
             'problematicas' => $problematicas,
+            'error'=>$error,
         ));
     }
 
@@ -48,6 +50,8 @@ class ProblematicaController extends Controller
 
         $form->get('provincia')->setData("Córdoba");
         $form->get('fecha')->setData(new \DateTime('now'));
+
+        $form->get('fecha_estado')->setData(new \DateTime('now'));
 
 
         $form->handleRequest($request);
@@ -92,9 +96,13 @@ class ProblematicaController extends Controller
     {
         $deleteForm = $this->createDeleteForm($problematica);
         $editForm = $this->createForm('AppBundle\Form\ProblematicaType', $problematica);
+        $editForm->get('fecha_estado')->setData(new \DateTime('now'));
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_problematica_index');

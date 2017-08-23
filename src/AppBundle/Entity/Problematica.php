@@ -78,17 +78,17 @@ class Problematica
     private $descripcion;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="fecha", type="datetime")
+     * @ORM\Column(name="fecha", type="date")
      */
     private $fecha;
 
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="fecha_estado", type="datetime")
+     * @ORM\Column(name="fecha_estado", type="date")
      */
     private $fecha_estado;
 
@@ -364,9 +364,36 @@ class Problematica
         return $this->tipoproblematica;
     }
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Estado", inversedBy="problematicas")
      * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
      */
     private $estado;
+
+
+
+    /**
+     * Set estado
+     *
+     * @param \AppBundle\Entity\Estado $estado
+     *
+     * @return Problematica
+     */
+    public function setEstado(\AppBundle\Entity\Estado $estado = null)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return \AppBundle\Entity\Estado
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
 }

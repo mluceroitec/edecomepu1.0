@@ -18,8 +18,8 @@
 {% block body %}
     <div class="card">
         <div class="card-header" data-background-color="purple">
-            <h3 class="title text-center">Problemática</h3>
-            <h4 class=" text-center">Completar los campos</h4>
+            <h3 class="title text-center">Alta de Problemática</h3>
+            <h4 class=" text-center">Completar los campos, una vez que los campos esten completos y sean correctos se podran guardar</h4>
         </div>
         <br><br>
         <div class="">
@@ -51,6 +51,12 @@
                     <span class="text-danger" id="span2"></span>
 
 
+                </div>
+            </div>
+            <div class="col-sm-2 ">
+                <div class="form-group label-floating">
+                    <label class="control-label">Fecha de alta</label>
+                    {{ form_widget(form.fecha, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
             <div class="col-sm-2" style="display: none">
@@ -90,7 +96,6 @@
                 </div>
             </div>
 
-
             <div class="col-sm-10 ">
                 <div class="form-group label-floating">
                     <label class="control-label ">Observacion</label>
@@ -104,19 +109,26 @@
                     {{ form_widget(form.tipoproblematica, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
-            <div style="display: none">
+
+            <div class="col-sm-3 ">
                 <div class="form-group label-floating">
-                    {{ form_widget(form.fecha, { 'attr': {'class':'form-control'}})}}
+                    <label class="control-label color">Estado</label>
+                    {{ form_widget(form.estado, { 'attr': {'class':'form-control'}})}}
+                </div>
+            </div>
+            <div class="col-sm-3  " style="display: none">
+                <div class="form-group label-floating">
+                    {{ form_widget(form.fecha_estado, { 'attr': {'class':'form-control'}})}}
                 </div>
             </div>
             <br><br>
         </div>
 
     </div>
+
     <a class="btn btn-primary btn-round pull-left" href="{{ path('admin_problematica_index') }}">Ir al listado</a>
 
     <input class="btn btn-primary btn-round pull-right" type="submit" id="action" value="Guardar" />
-
 
     {{ form_end(form) }}
 
@@ -128,19 +140,12 @@
 
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}" ></script>
-    <script src="{{ asset('assets/js/jquery.min.js') }}" ></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}" ></script>
-    <script src="{{ asset('assets/js/material.min.js') }}" ></script>
 
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 
     <!--  Plugin for the Datepicker, full documentation here: http://www.eyecon.ro/bootstrap-datepicker/ -->
 
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
-    <script src="{{ asset('assets/js/material-kit.js') }}" ></script>
-    <script src="{{ asset('assets/js/material-dashboard.js') }}"></script>
-
 
     <script>
 

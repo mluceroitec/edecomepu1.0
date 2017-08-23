@@ -13,7 +13,7 @@ class ProblematicaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('calle')->add('altura')->add('ciudad')->add('provincia')->add('pais')->add('latitud')->add('longitud')->add('descripcion')->add('fecha')->add('tipoproblematica');
+        $builder->add('calle')->add('altura')->add('ciudad')->add('provincia')->add('pais')->add('latitud')->add('longitud')->add('descripcion')->add('fecha')->add('fecha_estado')->add('tipoproblematica')->add('estado');
     }
     
     /**

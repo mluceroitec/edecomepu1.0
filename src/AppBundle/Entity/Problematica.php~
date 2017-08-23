@@ -78,13 +78,36 @@ class Problematica
     private $descripcion;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="fecha", type="datetime")
+     * @ORM\Column(name="fecha", type="date")
      */
     private $fecha;
 
 
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="fecha_estado", type="date")
+     */
+    private $fecha_estado;
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaEstado()
+    {
+        return $this->fecha_estado;
+    }
+
+    /**
+     * @param \DateTime $fecha_estado
+     */
+    public function setFechaEstado($fecha_estado)
+    {
+        $this->fecha_estado = $fecha_estado;
+    }
+    
     /**
      * Get id
      *
@@ -316,5 +339,61 @@ class Problematica
      * @ORM\JoinColumn(name="tipoproblematica_id", referencedColumnName="id")
      */
     private $tipoproblematica;
-}
 
+    /**
+     * Set tipoproblematica
+     *
+     * @param \AppBundle\Entity\TipoProblematica $tipoproblematica
+     *
+     * @return Problematica
+     */
+    public function setTipoproblematica(\AppBundle\Entity\TipoProblematica $tipoproblematica = null)
+    {
+        $this->tipoproblematica = $tipoproblematica;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoproblematica
+     *
+     * @return \AppBundle\Entity\TipoProblematica
+     */
+    public function getTipoproblematica()
+    {
+        return $this->tipoproblematica;
+    }
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Estado", inversedBy="problematicas")
+     * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
+     */
+    private $estado;
+
+
+
+    /**
+     * Set estado
+     *
+     * @param \AppBundle\Entity\Estado $estado
+     *
+     * @return Problematica
+     */
+    public function setEstado(\AppBundle\Entity\Estado $estado = null)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return \AppBundle\Entity\Estado
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+}
