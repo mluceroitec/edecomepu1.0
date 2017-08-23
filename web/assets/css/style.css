@@ -102,3 +102,43 @@ background-color: black !important;}
     /*background-color: rgba(0, 0, 0, 0.5);*/
 
 /*}*/
+
+label{
+    color: #000;
+}
+select{
+    color: #000000;
+}
+
+.dt-button {
+    background: rgba(227, 227, 227, 0.26) !important;
+    /* For browsers that do not support gradients */
+
+    background: -webkit-linear-gradient(90deg, #26c6da,   #006064) !important;
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, #26c6da,   #006064) !important;
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, #26c6da,   #006064) !important;
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(0deg,   #006064,   #006064) !important;
+    /* Standard syntax */
+    background-color: rgba(0, 0, 0, 0.5) !important;
+
+}
+.dt-button{
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 15px !important;
+    position: relative !important;
+    padding: 6px 20px !important;
+    margin: 4px 1px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0 !important;
+    will-change: box-shadow, transform !important;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.lf{
+    padding: 10px !important;
+}

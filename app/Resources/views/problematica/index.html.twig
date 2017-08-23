@@ -58,7 +58,7 @@
                                 <div class="card-footer text-center">
                                     <button class="btn btn-round  btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar</button>
 
-                                    <button id="btnGo" data-dismiss="modal" class="btn btn-round btn-primary" type="button">Buscar</button>
+                                    <button id="btnGo" data-dismiss="modal" class="btn btn-round btn-primary lf" type="button">Buscar</button>
 
                                 </div>
                             </div>
@@ -224,8 +224,50 @@
 
                     dom: 'B <"clear"> lfrtip',
                     buttons: [
-                        'csv', 'excel', 'pdf', 'print'
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: [  1, 2,3,4, 5 ]
+                            }
+                        },
+//                        {
+//                            extend: 'copyHtml5',
+//                            exportOptions: {
+//                                columns: [  1, 2,3,4, 5 ]
+//                            }
+//                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [  1, 2,3,4, 5 ]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [  1, 2,3,4, 5 ]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [  1, 2,3,4, 5 ]
+                            }
+                        }
+
                     ]
+
+
+//                    buttons: [
+//                        'csv', 'excel', 'pdf', 'print',
+//                        {
+//                            text: 'pdf',
+//                            extend: 'pdfHtml5',
+//                            exportOptions: {
+//                                columns: [1,2,3]
+//                            }
+//                        }
+//                    ]
 
 
 
