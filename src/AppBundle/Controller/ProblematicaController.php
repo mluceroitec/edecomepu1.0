@@ -96,6 +96,7 @@ class ProblematicaController extends Controller
     {
         $deleteForm = $this->createDeleteForm($problematica);
         $editForm = $this->createForm('AppBundle\Form\ProblematicaType', $problematica);
+
         $editForm->get('fecha_estado')->setData(new \DateTime('now'));
 
         $editForm->handleRequest($request);
