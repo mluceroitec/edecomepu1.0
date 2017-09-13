@@ -63,19 +63,34 @@ demo = {
         var fecha=new Date();
         day=fecha.getDate();
         year=fecha.getFullYear();
-
+        var meses = new Array();
+        meses[1] = "Enero";
+        meses[2] = "Febrero";
+        meses[3] = "Marzo";
+        meses[4] = "Abril";
+        meses[5] = "Mayo";
+        meses[6] = "Junio";
+        meses[7] = "Julio";
+        meses[8] = "Agosto";
+        meses[9] = "Septiembre";
+        meses[10] = "Octubre";
+        meses[11] = "Noviembre";
+        meses[12] = "Diciembre";
         var fechaatras="";
         var fechas= [];
 
-        for (i = 0; i < 4; i++) {
+        var month=fecha.getMonth();
+        fechas[0]=meses[month];
+
+        for (i = 1; i < 4; i++) {
             var month=fecha.getMonth()-i;
-            fechas[i]=+1+"/"+month+"/"+year;
+            fechas[i]=meses[month];
 
         }
         console.log(fechas);
-        var month=fecha.getMonth()+1;
+        var month=meses[fecha.getMonth()+1];
 
-        var hoy=+1+"/"+month+"/"+year;
+        var hoy=month+" ";
         $.ajax({
             type: "POST",
             url: "http://127.0.0.1:8000/sql_fecha",
@@ -91,7 +106,7 @@ demo = {
                 }
             }
             dataDailySalesChart = {
-                labels: [fechas[3], fechas[2], fechas[1], fechas[0], hoy],
+                labels: [fechas[3], fechas[2], fechas[1],fechas[0], hoy,"Año: "+year],
                 series: [
                     [obj[3].cantidad,obj[2].cantidad,obj[1].cantidad, obj[0].cantidad,obj[4].cantidad]
                 ]
@@ -176,9 +191,9 @@ demo = {
             }
             var dataEmailsSubscriptionChart = {
 
-                labels: [obj[0].nombre,obj[1].nombre, obj[2].nombre, obj[3].nombre,obj[4].nombre, obj[5].nombre],
+                labels: [obj[0].nombre,"",obj[1].nombre,"", obj[2].nombre,"", obj[3].nombre,"",obj[4].nombre,"", obj[5].nombre],
                 series: [
-                    [obj[0].cantidad, obj[1].cantidad, obj[2].cantidad,obj[3].cantidad,obj[4].cantidad,obj[5].cantidad]
+                    [obj[0].cantidad,"", obj[1].cantidad,"", obj[2].cantidad,"",obj[3].cantidad,"",obj[4].cantidad,"",obj[5].cantidad]
 
                 ]
 
