@@ -78,17 +78,17 @@ class Problematica
     private $descripcion;
 
     /**
-     * @var \Date
+     * @var \Datetime
      *
-     * @ORM\Column(name="fecha", type="date")
+     * @ORM\Column(name="fecha", type="datetime")
      */
     private $fecha;
 
 
     /**
-     * @var \Date
+     * @var \Datetime
      *
-     * @ORM\Column(name="fecha_estado", type="date")
+     * @ORM\Column(name="fecha_estado", type="datetime")
      */
     private $fecha_estado;
 
